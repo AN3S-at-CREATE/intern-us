@@ -1,0 +1,1612 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Investment Report</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #A8CF45 0%, #BAD96B 50%, #7D9C33 100%);
+            min-height: 100%;
+            animation: backgroundShift 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% { background: linear-gradient(135deg, #A8CF45 0%, #BAD96B 50%, #7D9C33 100%); }
+            100% { background: linear-gradient(135deg, #7D9C33 0%, #A8CF45 50%, #BAD96B 100%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(69, 92, 8, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(168, 207, 69, 0.3);
+            animation: fadeInScale 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .header h1 {
+            color: #455C08;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            text-align: center;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 10px rgba(168, 207, 69, 0.3); }
+            to { text-shadow: 0 0 20px rgba(168, 207, 69, 0.6); }
+        }
+
+        .header .subtitle {
+            color: #7D9C33;
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .report-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(69, 92, 8, 0.1);
+            border-left: 6px solid #A8CF45;
+            transition: all 0.4s ease;
+            animation: slideInLeft 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .report-card:nth-child(even) {
+            animation: slideInRight 1s ease-out;
+            border-left: 6px solid #7D9C33;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .report-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(69, 92, 8, 0.2);
+            border-left-width: 8px;
+        }
+
+        .section-title {
+            color: #455C08;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #A8CF45, #BAD96B);
+            border-radius: 2px;
+            animation: expandLine 2s ease-out 0.5s both;
+        }
+
+        @keyframes expandLine {
+            from { width: 0; }
+            to { width: 60px; }
+        }
+
+        .content-text {
+            color: #333;
+            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #A8CF45, #BAD96B);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(168, 207, 69, 0.3);
+            animation: bounceIn 1s ease-out;
+            animation-fill-mode: both;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            animation: countUp 2s ease-out 1s both;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(168, 207, 69, 0.1), rgba(186, 217, 107, 0.1));
+            border: 2px solid #BAD96B;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .bullet-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .bullet-point:nth-child(1) { animation-delay: 0.1s; }
+        .bullet-point:nth-child(2) { animation-delay: 0.2s; }
+        .bullet-point:nth-child(3) { animation-delay: 0.3s; }
+        .bullet-point:nth-child(4) { animation-delay: 0.4s; }
+        .bullet-point:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bullet-icon {
+            width: 8px;
+            height: 8px;
+            background: #A8CF45;
+            border-radius: 50%;
+            margin-right: 1rem;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(168, 207, 69, 0.7);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 10px rgba(168, 207, 69, 0);
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background: #A8CF45;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-circle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            background: #BAD96B;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-circle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            background: #7D9C33;
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(10px) rotate(240deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .recommendation-card {
+            background: linear-gradient(135deg, rgba(186, 217, 107, 0.1), rgba(168, 207, 69, 0.1));
+            border: 2px solid #BAD96B;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            animation: slideInUp 1s ease-out;
+            animation-fill-mode: both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recommendation-card:nth-child(1) { animation-delay: 0.2s; }
+        .recommendation-card:nth-child(2) { animation-delay: 0.4s; }
+        .recommendation-card:nth-child(3) { animation-delay: 0.6s; }
+        .recommendation-card:nth-child(4) { animation-delay: 0.8s; }
+
+        .recommendation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #A8CF45, #BAD96B, #7D9C33);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .recommendation-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(125, 156, 51, 0.2);
+            border-color: #A8CF45;
+        }
+
+        .recommendation-card h4 {
+            color: #455C08;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            animation: fadeInDown 1s ease-out 1s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .recommendation-card p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .metrics-box {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 4px solid #7D9C33;
+            font-size: 0.9rem;
+            color: #555;
+            animation: slideInLeft 1s ease-out 1.2s both;
+        }
+
+        .metrics-box strong {
+            color: #455C08;
+        }
+
+        .ai-chat-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #A8CF45, #BAD96B);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(168, 207, 69, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            animation: buttonPulse 3s ease-in-out infinite;
+        }
+
+        .ai-chat-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(168, 207, 69, 0.6);
+            background: linear-gradient(135deg, #BAD96B, #A8CF45);
+        }
+
+        .ai-chat-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(168, 207, 69, 0.4);
+            }
+            50% {
+                box-shadow: 0 12px 30px rgba(168, 207, 69, 0.6);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 2rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .report-card {
+                padding: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .recommendation-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="floating-elements">
+   <div class="floating-circle"></div>
+   <div class="floating-circle"></div>
+   <div class="floating-circle"></div>
+  </div>
+  <main class="container">
+   <header class="header">
+    <h1 id="report-title">Intern US Dual‑Perspective Strategic Analysis</h1>
+    <p class="subtitle" id="company-name">Business Investment Report</p>
+   </header>
+   <section class="report-card">
+    <h2 class="section-title">AI-Enhanced Analysis</h2>
+    <div class="highlight-box" style="background: linear-gradient(135deg, rgba(186, 217, 107, 0.2), rgba(168, 207, 69, 0.2)); border-color: #A8CF45; text-align: center; padding: 2.5rem;">
+     <h3 style="color: #455C08; margin-top: 0; margin-bottom: 1.5rem;">Interactive AI Document Analysis</h3>
+     <p style="color: #333; line-height: 1.7; margin-bottom: 2rem; font-size: 1.1rem;">Dive deeper into this strategic analysis with our AI-powered document assistant. Ask questions, explore specific sections, and get personalized insights about the Intern US opportunity.</p><a href="https://notebooklm.google.com/notebook/d632585d-005c-463d-8d14-791de58338af" target="_blank" rel="noopener noreferrer" class="ai-chat-button">
+      <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 0.75rem;"><path d="M12 2C6.48 2 2 6.48 2 12C2 13.54 2.36 14.99 3.01 16.28L2 22L7.72 20.99C9.01 21.64 10.46 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C10.74 20 9.54 19.75 8.46 19.3L6 20L6.7 17.54C6.25 16.46 6 15.26 6 14C6 8.48 8.48 6 12 6C15.52 6 18 8.48 18 12C18 15.52 15.52 18 12 18Z" fill="currentColor" /> <circle cx="9" cy="12" r="1" fill="currentColor" /> <circle cx="12" cy="12" r="1" fill="currentColor" /> <circle cx="15" cy="12" r="1" fill="currentColor" />
+      </svg> Chat with AI Document Assistant </a>
+     <p style="color: #7D9C33; font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">Powered by Google NotebookLM • Opens in new tab</p>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title" id="purpose-heading">Purpose</h2>
+    <div class="content-text">
+     Intern US is a digital platform that connects South African students in their final years of study with industry partners. This report provides a dual‑perspective analysis—uncovering hidden problems and systemic barriers (negative view) while highlighting opportunities, strengths, and growth drivers (positive view). Each section ends with actionable recommendations and metrics for tracking impact.
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title" id="analysis-heading">Student Needs &amp; Behaviours</h2>
+    <div class="stats-grid">
+     <div class="stat-item"><span class="stat-number">46%</span>
+      <div class="stat-label">
+       Youth Unemployment Rate (15-34 years)
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">62%</span>
+      <div class="stat-label">
+       Unemployment Rate (15-24 years)
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">58.7%</span>
+      <div class="stat-label">
+       Unemployed Youth with No Experience
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">R938</span>
+      <div class="stat-label">
+       Monthly Job Seeking Costs
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box">
+     <h3 style="color: #455C08; margin-top: 0;">Hidden Barriers, Unmet Needs, and Systemic Tensions</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Youth unemployment and lack of first‑job experience:</strong><br>
+        South Africa's youth unemployment rate reached 46% for 15‑34‑year‑olds in 2025, and 62% for ages 15–24. Nearly 58.7% of unemployed youth have no previous work experience. Employers favor experienced candidates, locking many students into a "no experience, no job" trap.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>High cost of job seeking:</strong><br>
+        Young people spend around R938 per month on transport, data, CV printing, and certifications to look for work. These costs often exceed household income and force students to choose between job searching and basic needs.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Weak social capital and information asymmetry:</strong><br>
+        95% of young people believe they need family or friends to finish studies or find work. Six in ten discovered opportunities through social connections. Students from rural or low‑income households lack these networks, perpetuating inequality.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Mismatch between education and industry needs:</strong><br>
+        Employers complain that graduates lack problem‑solving skills, business acumen, technological literacy, and communication skills. Fault lines in the school system make "matric" an unreliable indicator of competence.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Digital divide:</strong><br>
+        Only 38% of South Africans own a smartphone. Rural mobile users experience slower upload speeds and up to 5.6% of time without signal. Platform adoption may be hindered by data costs and connectivity.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Algorithmic bias and language barriers:</strong><br>
+        AI recruitment systems often favor privileged candidates. Recruitment algorithms "often favor candidates from privileged backgrounds" and language barriers exacerbate inequalities.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Motivators and Opportunities to Empower Students</h2>
+    <div class="stats-grid">
+     <div class="stat-item"><span class="stat-number">10-15%</span>
+      <div class="stat-label">
+       Stable Employment Without Early Experience
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">84,000</span>
+      <div class="stat-label">
+       Zero-Rated Course Completions
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">74.7%</span>
+      <div class="stat-label">
+       South Africans Using Internet
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">49.71</span>
+      <div class="stat-label">
+       Median Mobile Speed (Mbps)
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box">
+     <h3 style="color: #455C08; margin-top: 0;">Key Opportunities and Growth Drivers</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Early work experience matters:</strong><br>
+        Early work improves earnings mobility, mental health, and resilience. Only 10–15% of participants remain in stable employment without it. Internships or short placements can provide skills and confidence.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Zero‑rated and mobile‑first platforms reduce costs:</strong><br>
+        SA Youth offers a geo‑mapped job platform that is zero‑rated, eliminating CV printing costs and matching opportunities near youths' homes. Giraffe's platform allows job seekers to create a mobile CV for free and uses voice notes for self‑promotion. Zero‑rated courses saw 84,000 completions and 10% of learners found a job.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Growth of digital literacy:</strong><br>
+        About 74.7% of South Africans use the internet and 97.6% of users access it via mobile. Median mobile internet speeds have improved to 49.71 Mbps.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Social networks as placement channels:</strong><br>
+        Community hubs such as churches, car washes, and hair salons are used by job seekers. Emphasizing peer networks in the platform design may improve discovery.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Industry Engagement &amp; Expectations</h2>
+    <div class="stats-grid">
+     <div class="stat-item"><span class="stat-number">6%</span>
+      <div class="stat-label">
+       Required Payroll Spend on Skills Development
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">2 Days</span>
+      <div class="stat-label">
+       Time-to-Hire with Digital Platforms
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">6.5×</span>
+      <div class="stat-label">
+       Improved High-Potential Candidate ID
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">2029</span>
+      <div class="stat-label">
+       ETI Available Until Feb 28
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box">
+     <h3 style="color: #455C08; margin-top: 0;">Problems and Hesitations</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Risk aversion and administrative burden:</strong><br>
+        Employers favor experienced workers and use low‑risk hiring practices; standard screening tools often filter out disadvantaged youth. Many companies are hesitant to take on interns due to mentoring costs, lack of supervisors, and late appointment of mentors.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Skills mismatch and productivity concerns:</strong><br>
+        Employers perceive graduates as underprepared for workplace demands and fear that internship programs will not deliver tangible productivity gains.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Compliance and legal complexity:</strong><br>
+        Under South African labor law, interns are considered employees and minimum wage applies unless the internship is a registered training program or shorter than three months. Companies worry about labor disputes and regulatory risk.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Limited exposure to candidates:</strong><br>
+        Without efficient matching, HR departments spend significant time on screening and interviews; this increases recruitment costs.
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box" style="background: linear-gradient(135deg, rgba(186, 217, 107, 0.15), rgba(168, 207, 69, 0.15)); border-color: #A8CF45;">
+     <h3 style="color: #455C08; margin-top: 0;">Incentives and Positive Drivers</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Broad‑based Black Economic Empowerment (B‑BBEE):</strong><br>
+        Companies can improve their B‑BBEE score by investing in skills development and employing unemployed black youth. Sector codes require spending 6% of payroll on skills development.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Learnership and tax incentives:</strong><br>
+        Section 12H of the Income Tax Act provides annual and completion allowances for learnerships; allowances reduce tax liability and improve B‑BBEE compliance. The incentive has been extended until 31 March 2027.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Employment Tax Incentive (ETI):</strong><br>
+        Employers receive PAYE reductions for hiring youth aged 18‑29 for up to 24 months. Employees must be paid at least the minimum wage or R2,500 for a full month. The ETI remains available until 28 February 2029.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Digital recruiting platforms:</strong><br>
+        Competitors like JOBJACK offer psychometric assessments, built‑in credit and risk checks, and automated screening; they report time‑to‑hire as short as 2 days and 6.5× improved identification of high‑potential candidates. These benefits demonstrate that employers value data‑driven, compliant solutions.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Student Recommendations and Metrics</h2>
+    <div class="recommendations-grid">
+     <div class="recommendation-card">
+      <h4>Offer cost‑efficient search</h4>
+      <p>Provide a zero‑rated, data‑light mobile app with offline capabilities and free CV‑building tools; partner with mobile operators to subsidize data.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track average cost per job search (target: reduce below R200 per month) and number of zero‑rated users.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Integrated social capital</h4>
+      <p>Integrate peer endorsement features and community groups within the platform.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Measure proportion of hires coming via referrals and user network size.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Skills bridging</h4>
+      <p>Offer micro‑credentials and soft‑skill training aligned with industry demands (problem solving, communication).</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track course completion rates and improvements in candidate evaluation scores.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Accessibility</h4>
+      <p>Provide multi‑language support, voice‑note applications, and offline modules for areas with poor connectivity.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Measure engagement rates in rural vs urban users and drop‑off rates by connectivity quality.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Industry Recommendations and Metrics</h2>
+    <div class="recommendations-grid">
+     <div class="recommendation-card">
+      <h4>Align incentives</h4>
+      <p>Emphasize tax and B‑BBEE benefits in marketing; provide assistance with ETI claims and Section 12H compliance.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track number of employers using incentives and average payroll savings.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Reduce perceived risk</h4>
+      <p>Offer structured onboarding and mentoring toolkits, appoint mentors early, and provide training for supervisors.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Measure employer satisfaction, mentor participation rates, and intern retention.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Automated screening</h4>
+      <p>Provide employers with psychometric assessments, skills tests, and algorithmic matching.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Benchmark time‑to‑hire, admin hours saved, and candidate quality scores against industry averages.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Compliance and transparency</h4>
+      <p>Embed POPIA‑compliant data handling, anonymize sensitive data, and provide clear terms.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Monitor compliance incidents and audit results.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">University Ecosystem &amp; Partnerships</h2>
+    <div class="stats-grid">
+     <div class="stat-item"><span class="stat-number">THENSA</span>
+      <div class="stat-label">
+       Applied Universities Network
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">SETAs</span>
+      <div class="stat-label">
+       Sector Education Training Authorities
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">WIL</span>
+      <div class="stat-label">
+       Work-Integrated Learning Programs
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">Higher</span>
+      <div class="stat-label">
+       Employment Rates from Applied Programs
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box">
+     <h3 style="color: #455C08; margin-top: 0;">Barriers and Misalignments</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Academic–industry mismatch:</strong><br>
+        Employers find that youths lack critical skills for the workplace such as problem solving, communication, and business acumen. University curricula often lag behind technological advances and industry requirements. Secondary school quality varies greatly, making "matric" an unreliable indicator.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Limited work‑integrated learning (WIL):</strong><br>
+        Internship programs often face inadequate placement sites, restrictive environments, late mentor appointments, and lack of qualified supervisors. Some universities treat internships as a tick‑box requirement rather than an integral part of education.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Coordination challenges:</strong><br>
+        Sector Education and Training Authorities (SETAs) operate in silos; funding models are misaligned, and data sharing between universities and industry is weak. Bureaucratic processes delay partnership agreements.
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box" style="background: linear-gradient(135deg, rgba(186, 217, 107, 0.15), rgba(168, 207, 69, 0.15)); border-color: #A8CF45;">
+     <h3 style="color: #455C08; margin-top: 0;">Opportunities and Partnership Models</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Applied universities and technology institutes:</strong><br>
+        Institutions within the THENSA network emphasize applied research, frequent curriculum updates, and industry collaboration. Their programs include work‑integrated learning placements, forecasting emerging skills, and equipping academic staff with industry knowledge. Graduates from these programs report higher employment rates and more entrepreneurial ventures.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Cross‑sector partnerships:</strong><br>
+        Initiatives where employers, government, and training providers collaborate to link training with jobs. These partnerships combine theory and experiential learning and directly place trainees in employment. Government codes require a portion of skills spend to benefit unemployed black youth, creating a strong incentive.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>SETAs and SETA‑aligned programs:</strong><br>
+        Strengthening SETAs can align training with occupational demands and qualification design. Many companies already collaborate with SETAs to accredit learnerships.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">University Partnership Recommendations and Metrics</h2>
+    <div class="recommendations-grid">
+     <div class="recommendation-card">
+      <h4>Formalized WIL frameworks</h4>
+      <p>Partner with universities and SETAs to embed internship opportunities into curricula, ensuring early mentor appointment, qualified supervisors, and integration of academic theory with practical tasks.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track number of formal partnerships, student placement rates, and mentorship quality scores.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Curriculum co‑design</h4>
+      <p>Establish advisory boards with employers to regularly update course content; incorporate digital skills, problem‑solving, and soft skills.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Measure curriculum updates per year and employer satisfaction with graduate readiness.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Data sharing and analytics</h4>
+      <p>Build a shared platform that aggregates student performance, employer feedback, and job outcomes.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track data-sharing agreements and number of insights generated.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Funding alignment</h4>
+      <p>Work with government to streamline grant applications and ensure funds flow quickly to universities hosting WIL programs.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Monitor funding disbursement times and program participation.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Platform Features &amp; User Experience</h2>
+    <div class="stats-grid">
+     <div class="stat-item"><span class="stat-number">38%</span>
+      <div class="stat-label">
+       South Africans Own Smartphones
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">11</span>
+      <div class="stat-label">
+       Official Languages in South Africa
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">5.6%</span>
+      <div class="stat-label">
+       Time Without Signal (Rural Areas)
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">3G</span>
+      <div class="stat-label">
+       Network Speed Optimization Target
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box">
+     <h3 style="color: #455C08; margin-top: 0;">Friction Points and Design Flaws</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>High data and connectivity costs:</strong><br>
+        Many youths cannot afford constant internet access; only 38% own smartphones and rural areas face slower speeds and more signal loss. Heavy websites or apps will deter adoption.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Language and literacy barriers:</strong><br>
+        South Africa has eleven official languages; dominance of English in digital tools can marginalize non‑English speakers. Some youths may also struggle with text‑based CV creation.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Complex onboarding and CV creation:</strong><br>
+        Traditional platforms require printing CVs and scanning certificates; this is costly and time‑consuming.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Algorithmic opacity:</strong><br>
+        AI‑driven matching can obscure why candidates are selected or rejected; biases may exclude disadvantaged students.
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box" style="background: linear-gradient(135deg, rgba(186, 217, 107, 0.15), rgba(168, 207, 69, 0.15)); border-color: #A8CF45;">
+     <h3 style="color: #455C08; margin-top: 0;">Positive Features and Design Principles</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Zero‑rated access and geo‑mapping:</strong><br>
+        The SA Youth platform eliminates data costs and uses geo‑mapping to match opportunities near users' location, reducing travel and printing expenses.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Mobile CV builders and voice notes:</strong><br>
+        Giraffe's app allows users to create CVs on mobile and attach voice notes explaining suitability; it automates candidate sourcing and screening.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Psychometric and skills assessments:</strong><br>
+        JOBJACK integrates psychometric assessments and risk checks to identify high‑potential candidates. Employers save time and improve talent identification.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Multi‑channel support:</strong><br>
+        SA Youth provides call‑centre assistance, WhatsApp and email support, and free online courses. Multi‑channel engagement accommodates different comfort levels.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Platform Recommendations and Metrics</h2>
+    <div class="recommendations-grid">
+     <div class="recommendation-card">
+      <h4>Mobile‑first, data‑light design</h4>
+      <p>Develop a progressive web app that works on low‑end devices, uses compressed content, and caches data. Partner with ISPs for zero‑rating.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track average data usage per session and load times on 3G networks.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Multi‑language and voice features</h4>
+      <p>Offer multiple language interfaces and voice‑note applications.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Monitor language preference distribution and voice‑note usage rates.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Transparent algorithms</h4>
+      <p>Provide explanations for match results and incorporate user feedback to reduce biases. Conduct independent audits and share fairness reports.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track complaints regarding unfair matching and audit outcomes.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Integrated certification</h4>
+      <p>Allow users to upload certificates via mobile photos; verify via third‑party checks. Provide digital badges upon completion of micro‑courses.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Measure certificate verification success rate and user satisfaction.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Monetisation &amp; Financial Models</h2>
+    <div class="stats-grid">
+     <div class="stat-item"><span class="stat-number">Low</span>
+      <div class="stat-label">
+       Subscription Uptake in African Markets
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">B-BBEE</span>
+      <div class="stat-label">
+       Corporate Compliance Dependency
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">ETI</span>
+      <div class="stat-label">
+       Under-Utilized Tax Incentives
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">ARPU</span>
+      <div class="stat-label">
+       Average Revenue Per User Metric
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box">
+     <h3 style="color: #455C08; margin-top: 0;">Assumptions, Tensions, and Risks</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Who pays?:</strong><br>
+        Many jobtech platforms struggle to find a sustainable revenue model; listing fees may prioritize quantity over quality, commission models face transparency issues, subscription fees have low uptake in African markets, and grant reliance limits scale. Charging students may exacerbate inequality and conflict with mission.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Dependence on corporate funding:</strong><br>
+        Programs like YES rely on corporate sponsors and B‑BBEE incentives; economic downturns or policy changes could reduce funding. Over‑reliance on B‑BBEE compliance may narrow the customer base.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Complex tax and regulatory incentives:</strong><br>
+        Companies may not fully understand or utilize ETI, Section 12H, or B‑BBEE benefits, leading to under‑participation.
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box" style="background: linear-gradient(135deg, rgba(186, 217, 107, 0.15), rgba(168, 207, 69, 0.15)); border-color: #A8CF45;">
+     <h3 style="color: #455C08; margin-top: 0;">Creative, Sustainable Revenue Streams</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Employer‑side freemium model:</strong><br>
+        Basic posting and candidate browsing free for SMEs; premium services (advanced screening, psychometric testing, analytics, and B‑BBEE compliance reports) charged to employers. This aligns with jobtech models where platforms provide free core services but earn from value‑added features.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Education sponsorships:</strong><br>
+        Universities, SETAs, and corporates can sponsor micro‑courses or skill challenges in exchange for branding, data insights, or priority access to graduates. Charging training providers rather than students ensures accessibility.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Data analytics:</strong><br>
+        Offer anonymized labor‑market intelligence to government agencies, universities, and investors; ensure compliance with POPIA. Provide predictive analytics on skill gaps and regional demand.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Outcome‑based fees:</strong><br>
+        Charge employers a percentage of salary or a fixed fee only when an intern is successfully placed and retained for a minimum period. This performance‑based model reduces risk for employers.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Enterprise subscriptions:</strong><br>
+        Large companies may subscribe for unlimited listings, advanced integration with HR systems, and customized onboarding tools. Multi‑year contracts secure predictable revenue.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Financial Model Recommendations and Metrics</h2>
+    <div class="recommendations-grid">
+     <div class="recommendation-card">
+      <h4>Diversify revenue</h4>
+      <p>Pilot multiple models and measure revenue per employer segment, conversion rates from free to paid tiers, and average revenue per user (ARPU). Note: Avoid imposing fees on job seekers.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track revenue per employer segment, free-to-paid conversion rates, and ARPU across different tiers.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Maximize incentives</h4>
+      <p>Provide easy claim tools for ETI and tax allowances.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track number of companies claiming incentives through the platform and tax savings realized.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Integrate CSR and impact investment</h4>
+      <p>Partner with corporates looking for social impact; secure long‑term sponsorships for training modules.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Measure sponsorship funds raised and student reach.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Performance-based pricing</h4>
+      <p>Implement outcome-based fees that align platform success with employer satisfaction and student placement success.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Monitor placement success rates, retention periods, and employer satisfaction scores.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Market Landscape &amp; Competitor Analysis</h2>
+    <div class="stats-grid">
+     <div class="stat-item"><span class="stat-number">1%</span>
+      <div class="stat-label">
+       Gig Workers in SA (2021)
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">50%</span>
+      <div class="stat-label">
+       Giraffe Selection Pass Rate Increase
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">8 Hours</span>
+      <div class="stat-label">
+       Admin Reduction per Hire (JOBJACK)
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">6.5×</span>
+      <div class="stat-label">
+       Better High-Potential ID (JOBJACK)
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box">
+     <h3 style="color: #455C08; margin-top: 0;">Gaps and Weaknesses in Existing Solutions</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Partial or fragmented services:</strong><br>
+        Many platforms focus on either job postings, training, or recruitment screening, but few integrate all functions. Students often register on multiple systems, leading to duplicated efforts and inconsistent data.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Urban concentration:</strong><br>
+        Jobtech platforms mainly reach urban youth; gig workers are concentrated in Cape Town and Johannesburg, and only 1% of workers were gig workers in 2021. Rural connectivity issues hinder expansion.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Limited specialization for students:</strong><br>
+        Most platforms serve general youth or entry‑level job seekers. Final‑year students have different needs (timing of internships, alignment with degree requirements, and credit-bearing placements).
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Algorithmic transparency:</strong><br>
+        Many platforms rely on opaque AI matching; there is little information on fairness or bias mitigation.
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box" style="background: linear-gradient(135deg, rgba(186, 217, 107, 0.15), rgba(168, 207, 69, 0.15)); border-color: #A8CF45;">
+     <h3 style="color: #455C08; margin-top: 0;">Competitor Landscape Analysis</h3>
+     <div style="overflow-x: auto; margin: 1.5rem 0;">
+      <table style="width: 100%; border-collapse: collapse; background: rgba(255, 255, 255, 0.9); border-radius: 8px; overflow: hidden;">
+       <thead>
+        <tr style="background: linear-gradient(135deg, #A8CF45, #BAD96B); color: white;">
+         <th style="padding: 1rem; text-align: left; font-weight: 700;">Platform</th>
+         <th style="padding: 1rem; text-align: left; font-weight: 700;">Core Features</th>
+         <th style="padding: 1rem; text-align: left; font-weight: 700;">Strengths/Weaknesses</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr style="border-bottom: 1px solid #e0e0e0;">
+         <td style="padding: 1rem; font-weight: 600; color: #455C08;">SA Youth / Harambee</td>
+         <td style="padding: 1rem; font-size: 0.9rem;">Zero‑rated, geo‑mapping matching, call‑centre support, digital courses and CV templates.</td>
+         <td style="padding: 1rem; font-size: 0.9rem;">Free access reduces costs; strong public‑private partnership. However, broad focus may dilute attention to final‑year students; limited advanced screening.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e0e0e0; background: rgba(168, 207, 69, 0.05);">
+         <td style="padding: 1rem; font-weight: 600; color: #455C08;">YES (Youth Employment Service)</td>
+         <td style="padding: 1rem; font-size: 0.9rem;">12‑month paid work experiences, smartphone‑based training with zero‑rated apps, enterprise development funding and B‑BBEE benefits.</td>
+         <td style="padding: 1rem; font-size: 0.9rem;">Strong corporate backing and B‑BBEE incentive; limited to 1‑year placements and reliant on sponsors; not an open marketplace.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e0e0e0;">
+         <td style="padding: 1rem; font-weight: 600; color: #455C08;">JOBJACK</td>
+         <td style="padding: 1rem; font-size: 0.9rem;">SaaS applicant‑tracking platform for entry‑level recruitment with psychometric assessments, integrated credit &amp; risk checks, and compliance with POPIA &amp; Employment Equity Act.</td>
+         <td style="padding: 1rem; font-size: 0.9rem;">Automates hiring, reduces admin by 8 hours per hire and identifies high‑potential candidates 6.5× better than previous methods; may require employer subscription; primarily serves high‑volume roles like warehouse staff.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e0e0e0; background: rgba(168, 207, 69, 0.05);">
+         <td style="padding: 1rem; font-weight: 600; color: #455C08;">Giraffe (now part of Harambee)</td>
+         <td style="padding: 1rem; font-size: 0.9rem;">Automated job matching, mobile CV builder with voice notes, zero‑rated courses, matching ontology increasing candidate selection pass rates by 50%.</td>
+         <td style="padding: 1rem; font-size: 0.9rem;">Offers free courses and open‑source technology; emphasizes entry‑level jobs; now integrated into Harambee, limiting distinctiveness.</td>
+        </tr>
+        <tr>
+         <td style="padding: 1rem; font-weight: 600; color: #455C08;">University Career Services</td>
+         <td style="padding: 1rem; font-size: 0.9rem;">Portals and career fairs at individual universities.</td>
+         <td style="padding: 1rem; font-size: 0.9rem;">Highly fragmented; uneven quality and limited industry integration.</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="highlight-box" style="background: linear-gradient(135deg, rgba(125, 156, 51, 0.1), rgba(168, 207, 69, 0.1)); border-color: #7D9C33;">
+     <h3 style="color: #455C08; margin-top: 0;">Unique Value Proposition for Intern US</h3>
+     <p style="color: #333; line-height: 1.7; margin-bottom: 1rem;">Intern US can differentiate itself by focusing on <strong>final‑year students and capstone internships</strong> that align with degree requirements. By integrating with university curricula and providing employers with compliant, data‑driven matching and B‑BBEE support, Intern US can become the trusted bridge between academia and industry. Emphasis on fairness, transparency, and rural access will address existing gaps.</p>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Market Analysis Metrics and Recommendations</h2>
+    <div class="recommendations-grid">
+     <div class="recommendation-card">
+      <h4>Market penetration</h4>
+      <p>Focus on final-year student specialization to differentiate from broad-market competitors like SA Youth and Harambee.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Measure percentage of final‑year students registered vs total enrollment across participating universities.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Employer adoption</h4>
+      <p>Leverage advanced screening capabilities and B-BBEE compliance tools to compete with JOBJACK's enterprise features.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Number of employers posting internships and using premium services.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Placement success rate</h4>
+      <p>Build on Giraffe's 50% selection pass rate improvement by focusing on degree-aligned internship matching.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Proportion of matches leading to completed internships or permanent jobs.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>User retention and satisfaction</h4>
+      <p>Address fragmentation issues in university career services by providing integrated, consistent experience across institutions.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Net Promoter Score (NPS) and repeat usage rates.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Strategic Impact &amp; Growth Potential</h2>
+    <div class="stats-grid">
+     <div class="stat-item"><span class="stat-number">52%</span>
+      <div class="stat-label">
+       VC Deal Decline (2022-2024)
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">80%</span>
+      <div class="stat-label">
+       African Tech Funding from Abroad
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">27.7</span>
+      <div class="stat-label">
+       South Africa's Median Age
+      </div>
+     </div>
+     <div class="stat-item"><span class="stat-number">400</span>
+      <div class="stat-label">
+       Fewer VC Deals (2024)
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box">
+     <h3 style="color: #455C08; margin-top: 0;">Risks and Barriers to Scaling</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Funding volatility:</strong><br>
+        Africa's VC deals fell 52% between 2022 and 2024; funding shrank to fewer than 400 deals but median deal value rose, signaling more selective investment. Startups reliant on external capital may struggle to sustain growth.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Reliance on foreign investors:</strong><br>
+        Roughly 80% of African tech firms' funding comes from abroad; foreign investors are more likely to withdraw during downturns.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Economic and political instability:</strong><br>
+        Youth unemployment, inflation, and energy shortages could reduce employer demand for interns.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Digital divide and infrastructural disparities:</strong><br>
+        Rural connectivity and smartphone affordability remain barriers.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Regulatory changes:</strong><br>
+        Changes in B‑BBEE or tax incentive legislation could alter employer motivations.
+      </div>
+     </div>
+    </div>
+    <div class="highlight-box" style="background: linear-gradient(135deg, rgba(186, 217, 107, 0.15), rgba(168, 207, 69, 0.15)); border-color: #A8CF45;">
+     <h3 style="color: #455C08; margin-top: 0;">Growth Drivers and Scalable Strategies</h3>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Youthful population and internet adoption:</strong><br>
+        South Africa's median age is 27.7, and internet adoption continues to rise, creating a large, digitally engaged talent pool.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Government support for skills development:</strong><br>
+        Ongoing incentives and policy focus on youth employment and skills development.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Platform scalability:</strong><br>
+        Mobile‑first, data‑light design and partnerships with ISPs and universities enable rapid expansion.
+      </div>
+     </div>
+     <div class="bullet-point">
+      <div class="bullet-icon"></div>
+      <div><strong>Data‑driven insights:</strong><br>
+        Aggregated analytics on skills gaps and job outcomes inform continuous improvement and value for all stakeholders.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Strategic Growth Recommendations and Risk Mitigation</h2>
+    <div class="recommendations-grid">
+     <div class="recommendation-card">
+      <h4>Diversify funding sources</h4>
+      <p>Reduce dependence on foreign VC by pursuing local corporate partnerships, government grants, and revenue-based financing models.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track funding source diversity ratio, local vs foreign investment percentage, and revenue sustainability metrics.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Build economic resilience</h4>
+      <p>Develop counter-cyclical revenue streams and maintain lean operations that can adapt to economic downturns while preserving core value proposition.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Monitor burn rate, revenue per employee, and platform usage during economic stress periods.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Leverage demographic dividend</h4>
+      <p>Capitalize on South Africa's young population (median age 27.7) by creating age-appropriate digital experiences and career pathways.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Track user acquisition rates by age group, engagement levels, and career progression outcomes.
+      </div>
+     </div>
+     <div class="recommendation-card">
+      <h4>Scale through partnerships</h4>
+      <p>Establish strategic alliances with universities, SETAs, and mobile operators to reduce infrastructure costs and accelerate market penetration.</p>
+      <div class="metrics-box"><strong>Metrics:</strong> Measure partnership ROI, user acquisition cost through partnerships, and geographic expansion rate.
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="report-card">
+    <h2 class="section-title">Strategic Mind Map Overview</h2>
+    <div class="highlight-box" style="background: linear-gradient(135deg, rgba(186, 217, 107, 0.1), rgba(168, 207, 69, 0.1)); border-color: #A8CF45; text-align: center; padding: 2rem;">
+     <h3 style="color: #455C08; margin-top: 0; margin-bottom: 1.5rem;">Intern US Strategic Framework</h3>
+     <p style="color: #333; line-height: 1.7; margin-bottom: 2rem; font-size: 1rem;">This comprehensive mind map visualizes the interconnected elements of the Intern US platform strategy, from student needs and industry partnerships to monetization models and competitive positioning.</p>
+     <div class="mindmap-container" style="background: rgba(255, 255, 255, 0.95); border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(69, 92, 8, 0.1); margin: 1.5rem 0;"><img src="https://iili.io/Ksoxuf9.png" alt="Intern US Strategic Mind Map - Comprehensive overview of platform strategy including student needs, industry partnerships, monetization models, and competitive analysis" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 25px rgba(168, 207, 69, 0.2); transition: transform 0.3s ease;" onload="this.style.opacity='1'; this.style.transform='scale(1)'" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" onclick="openImageModal(this.src)" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'" loading="lazy">
+      <div style="display: none; padding: 2rem; text-align: center; color: #7D9C33; background: rgba(168, 207, 69, 0.1); border-radius: 8px; border: 2px dashed #BAD96B;">
+       <svg width="48" height="48" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 1rem; opacity: 0.6;"><path d="M21 19V5C21 3.9 20.1 3 19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19ZM8.5 13.5L11 16.51L14.5 12L19 18H5L8.5 13.5Z" fill="currentColor" />
+       </svg>
+       <p><strong>Strategic Mind Map</strong><br>
+        Visual overview of Intern US platform strategy and key components</p>
+      </div>
+     </div>
+     <p style="color: #7D9C33; font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">Click image to view full size • Strategic framework visualization</p>
+    </div>
+   </section>
+  </main>
+  <script>
+        const defaultConfig = {
+            report_title: "Intern US Dual‑Perspective Strategic Analysis",
+            company_name: "Business Investment Report",
+            purpose_heading: "Purpose",
+            analysis_heading: "Student Needs & Behaviours",
+            background_color: "#A8CF45",
+            surface_color: "#ffffff",
+            text_color: "#455C08",
+            primary_action: "#BAD96B",
+            secondary_action: "#7D9C33",
+            font_family: "Segoe UI",
+            font_size: 16
+        };
+
+        let config = { ...defaultConfig };
+
+        async function onConfigChange(newConfig) {
+            config = { ...config, ...newConfig };
+            
+            // Update text content
+            const reportTitle = document.getElementById('report-title');
+            const companyName = document.getElementById('company-name');
+            const purposeHeading = document.getElementById('purpose-heading');
+            const analysisHeading = document.getElementById('analysis-heading');
+            
+            if (reportTitle) reportTitle.textContent = config.report_title || defaultConfig.report_title;
+            if (companyName) companyName.textContent = config.company_name || defaultConfig.company_name;
+            if (purposeHeading) purposeHeading.textContent = config.purpose_heading || defaultConfig.purpose_heading;
+            if (analysisHeading) analysisHeading.textContent = config.analysis_heading || defaultConfig.analysis_heading;
+            
+            // Update colors
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const primaryAction = config.primary_action || defaultConfig.primary_action;
+            const secondaryAction = config.secondary_action || defaultConfig.secondary_action;
+            
+            document.body.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, ${primaryAction} 50%, ${secondaryAction} 100%)`;
+            
+            // Update font
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseSize = config.font_size || defaultConfig.font_size;
+            const fontStack = `${customFont}, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
+            
+            document.body.style.fontFamily = fontStack;
+            document.body.style.fontSize = `${baseSize}px`;
+            
+            // Update heading sizes proportionally
+            const headings = document.querySelectorAll('h1, h2, h3');
+            headings.forEach(heading => {
+                if (heading.tagName === 'H1') {
+                    heading.style.fontSize = `${baseSize * 2.5}px`;
+                } else if (heading.tagName === 'H2') {
+                    heading.style.fontSize = `${baseSize * 1.8}px`;
+                } else if (heading.tagName === 'H3') {
+                    heading.style.fontSize = `${baseSize * 1.2}px`;
+                }
+                heading.style.color = textColor;
+            });
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            config.background_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.surface_color || defaultConfig.surface_color,
+                        set: (value) => {
+                            config.surface_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            config.text_color = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.primary_action || defaultConfig.primary_action,
+                        set: (value) => {
+                            config.primary_action = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ primary_action: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.secondary_action || defaultConfig.secondary_action,
+                        set: (value) => {
+                            config.secondary_action = value;
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ secondary_action: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || defaultConfig.font_family,
+                    set: (value) => {
+                        config.font_family = value;
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || defaultConfig.font_size,
+                    set: (value) => {
+                        config.font_size = value;
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["report_title", config.report_title || defaultConfig.report_title],
+                ["company_name", config.company_name || defaultConfig.company_name],
+                ["purpose_heading", config.purpose_heading || defaultConfig.purpose_heading],
+                ["analysis_heading", config.analysis_heading || defaultConfig.analysis_heading]
+            ]);
+        }
+
+        // Initialize SDK when available
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+
+        // Image modal functionality
+        function openImageModal(imageSrc) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                cursor: pointer;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const img = document.createElement('img');
+            img.src = imageSrc;
+            img.style.cssText = `
+                max-width: 95%;
+                max-height: 95%;
+                border-radius: 12px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                animation: zoomIn 0.3s ease;
+            `;
+            
+            const closeButton = document.createElement('div');
+            closeButton.innerHTML = '×';
+            closeButton.style.cssText = `
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                color: white;
+                font-size: 40px;
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 10001;
+                transition: opacity 0.2s ease;
+            `;
+            
+            closeButton.onmouseover = () => closeButton.style.opacity = '0.7';
+            closeButton.onmouseout = () => closeButton.style.opacity = '1';
+            
+            modal.appendChild(img);
+            modal.appendChild(closeButton);
+            document.body.appendChild(modal);
+            
+            const closeModal = () => {
+                modal.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => document.body.removeChild(modal), 300);
+            };
+            
+            modal.onclick = closeModal;
+            closeButton.onclick = closeModal;
+            
+            // Prevent scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+            modal.onremove = () => document.body.style.overflow = 'auto';
+        }
+
+        // Add staggered animation delays to report cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.report-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${0.2 + (index * 0.3)}s`;
+            });
+
+            const statItems = document.querySelectorAll('.stat-item');
+            statItems.forEach((item, index) => {
+                item.style.animationDelay = `${1 + (index * 0.2)}s`;
+            });
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9975078d73944eb9',t:'MTc2MTkzMzM5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
