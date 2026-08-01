@@ -3,6 +3,7 @@
 **Analysis date:** 2026-07-24  
 **Repository root:** repository checkout root (`.`)
 **Branch of analysis artifacts:** `main-repo-analysis-super-roadmap-40bc`
+**Analyzed commit:** `768006c11d46ea4bc8ad570402d31ee1e92560ce`
 **Analyst posture:** Evidence-based static review + live execution (HTTP serve, Puppeteer, interactive browser)
 
 ---
@@ -59,7 +60,8 @@ A **static HTML business/investment report** titled *Intern US Dual‑Perspectiv
 | AI | Google NotebookLM (external) | CTA `a.ai-chat-button` |
 | Assets | Remote PNG on `iili.io` | Mind-map `src` |
 | Deploy | GitHub Actions + Jekyll → GitHub Pages | `.github/workflows/*.yml` |
-| Runtime deps | None | No package manager / lockfile |
+| Package/build deps | None | No package manager / lockfile |
+| External runtime deps | Tailwind CDN, Element SDK URLs, `iili.io` PNG, NotebookLM | Network-hosted CSS reset/integrations/content; SDKs fail harmlessly when absent |
 | Backend / DB / agents / RAG | **Absent** | Tree has no `src/`, `api/`, `agents/`, etc. |
 
 ### Explicit non-stack
@@ -224,6 +226,7 @@ flowchart LR
 
 ### Setup executed
 ```bash
+# From the repository checkout root:
 python3 -m http.server 8000
 # Open http://127.0.0.1:8000/indec.html
 ```
@@ -329,7 +332,7 @@ Focused on completing the **current vision** (excellent static report + reliable
 |---|--------|-----|--------|----------|
 | 1 | Add root `index.html` identical (or canonical) to report | Unblocks Pages/default URL | XS | Copy + optional `<link rel=canonical>`; update AGENTS |
 | 2 | Fix modal scroll + double-close | Core interactive bug | XS | Patch `closeModal`; stopPropagation; Escape |
-| 3 | Strip Tailwind CDN + CF leftover | Clean network/console | XS | Delete scripts |
+| 3 | Migrate Tailwind reset, then remove CDN + CF leftover | Clean network/console | XS | Complete B5 reset migration and visual parity check, then delete Tailwind; delete confirmed-dead CF script |
 | 4 | Remove/relocate workflows HTML duplicate | Prevent drift | XS | Delete after root index exists |
 | 5 | Add `README.md` + `.gitignore` + LICENSE | Human onboarding | S | Document serve, Pages, edit guide |
 | 6 | CSS variables + remove green inline | Visual coherence | M | `:root` tokens; replace inline colors |
@@ -407,7 +410,7 @@ A **production Intern US platform** (not just a report): mobile-first, data-ligh
 | Item | Impact | Effort | Type |
 |------|--------|--------|------|
 | `index.html` + modal fixes | High | XS | Quick win |
-| Remove dead scripts | Med | XS | Quick win |
+| Remove confirmed-dead Cloudflare script | Med | XS | Quick win |
 | Theme unification | Med | M | Quick win |
 | Self-host mind-map | Med | S | Quick win |
 | Report RAG chatbot | High | M–L | Strategic bet |
@@ -429,7 +432,7 @@ This repository is a **credible, runnable investor/strategy microsite** for Inte
 **Do this next (immediate 48-hour plan):**
 1. Canonicalize `index.html` and keep/alias `indec.html` if needed.  
 2. Patch modal close (scroll unlock + stopPropagation + Escape).  
-3. Delete Tailwind CDN, Cloudflare leftover, and workflows HTML duplicate.  
+3. Migrate the B5 reset styles and visually verify parity before deleting Tailwind; then delete the confirmed-dead Cloudflare script and workflows HTML duplicate.
 4. Add README + `.gitignore` + Playwright smoke in CI.  
 5. Explicitly choose: **report product** vs **platform build** before large AI/architecture spend.
 
@@ -446,30 +449,93 @@ Memory file updated with phase completion + insights + open questions. Index ini
 - `.github/workflows/index.html` — duplicate  
 - `AGENTS.md` — local run notes  
 
-### B. Analysis commands used
+### B. Portable baseline validation
+
+Run these commands from the repository checkout root. The recorded output applies to
+commit `768006c11d46ea4bc8ad570402d31ee1e92560ce`.
+
 ```bash
-find . -type f ...
+# Terminal 1
 python3 -m http.server 8000
-curl -I http://127.0.0.1:8000/indec.html
-curl -I https://iili.io/Ksoxuf9.png
-curl -I https://notebooklm.google.com/notebook/...
-google-chrome --headless=new --screenshot=...
-node <temporary-test-script>   # puppeteer-core validation script
-# Interactive browser validation (computer-use agent)
+
+# Terminal 2
+ANALYZED_COMMIT=768006c11d46ea4bc8ad570402d31ee1e92560ce
+git rev-parse "${ANALYZED_COMMIT}^{commit}"
+# 768006c11d46ea4bc8ad570402d31ee1e92560ce
+
+git cat-file -s "${ANALYZED_COMMIT}:indec.html"
+# 83149
+
+git diff --quiet "${ANALYZED_COMMIT}" -- indec.html
+# exit 0 (the served page matches the analyzed revision)
+
+curl -sS -o /dev/null -w '%{http_code}\n' \
+  http://127.0.0.1:8000/indec.html
+# 200
+
+curl -sS http://127.0.0.1:8000/ | grep -o 'Directory listing for /'
+# Directory listing for /
 ```
 
-### C. Artifacts
+The `83149` value above is the historical Git blob size, not a portable HTTP transfer
+size; checkout line-ending conversion can change bytes served without changing content.
+External-resource results are time-sensitive and are not presented as reproducible
+fixtures.
+
+### C. Dependency-free browser reproduction
+
+After starting the server above, open `/indec.html`, paste this complete command into
+the browser developer console, and inspect the JSON output. It reproduces the modal
+exception and retained overflow state, then verifies `onConfigChange` without requiring
+Puppeteer or adding package dependencies:
+
+```javascript
+(async () => {
+  const pageErrors = [];
+  const captureError = (event) => pageErrors.push(String(event.error || event.message));
+  window.addEventListener("error", captureError);
+
+  openImageModal("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==");
+  const modal = document.body.lastElementChild;
+  modal.lastElementChild.click();
+  await new Promise((resolve) => setTimeout(resolve, 400));
+
+  await onConfigChange({
+    report_title: "Config test title",
+    company_name: "Config test company",
+    background_color: "#010203"
+  });
+
+  const result = {
+    modalGone: !modal.isConnected,
+    bodyOverflow: document.body.style.overflow,
+    configTest: {
+      title: document.getElementById("report-title").textContent,
+      company: document.getElementById("company-name").textContent,
+      background: document.body.style.background
+    },
+    pageErrors
+  };
+  window.removeEventListener("error", captureError);
+  console.log(JSON.stringify(result, null, 2));
+})();
+```
+
+The historical Puppeteer output retained from the original analysis is included in
+Section 5.
+
+### D. Artifacts
 - No binary runtime artifacts were committed. Screenshots and Puppeteer output were
   temporary analysis-session files and are not cited as durable evidence.
 - The reproducible commands above and the results matrix preserve the tested behavior;
   future validation should retain any required artifacts under a tracked project path.
 
-### D. Limitations
+### E. Limitations
 - Browser MCP server unavailable; used Puppeteer + computer-use instead.  
 - NotebookLM deep content quality not evaluated (login wall).  
 - GitHub Pages live URL / Actions run history not fully verified in this environment.  
 - No production traffic/analytics data available.  
 - “Super-app” roadmap is strategic; implementing it requires a product decision beyond this repo’s current scope.
 
-### E. South African / POPIA note
+### F. South African / POPIA note
 Report content is macroeconomic/labour analysis, not a personal information store. Future student/employer data, CVs, and chat logs would be **personal information** under POPIA — design consent, minimality, operator agreements, and secure processing **before** collecting any of it. External Google NotebookLM usage should be disclosed to readers.
