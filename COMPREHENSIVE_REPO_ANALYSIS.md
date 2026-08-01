@@ -71,7 +71,7 @@ No React/Next, no Python/Node app server, no Docker Compose app, no vector DB, n
 
 ### Complete tree (tracked / meaningful paths)
 
-```
+```text
 .
 ├── AGENTS.md                          # Cloud agent runbook
 ├── indec.html                         # PRIMARY APP (report page)

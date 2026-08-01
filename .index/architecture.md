@@ -3,7 +3,7 @@
 ## System type
 Single-page **static document** with light client-side interactivity. Not a multi-service application.
 
-```
+```text
 Browser
   ├─ indec.html (content + ~750 lines custom CSS + inline JS)
   ├─ External: cdn.tailwindcss.com (loaded, unused by classes)

@@ -8,6 +8,7 @@ Living knowledge base for agents and humans working in this repository.
 3. Log meaningful refreshes in `context-refresh-log.md`.
 
 ## Contents
+
 | File | Purpose |
 |------|---------|
 | `file-inventory.md` | Inventory of all relevant files + status |
