@@ -7,7 +7,7 @@ Phase Complete: Full top-to-bottom repository analysis & super-app elevation roa
 - Insight 1: Repo is a single static HTML strategic report (`indec.html`, ~81 KB / 1841 lines), not a multi-tier application. It has no backend, DB, package manager, or application build step; deployment uses Jekyll.
 - Insight 2: Dual visual systems conflict — neon cyan/magenta CSS theme vs residual olive/green inline styles (`#455C08`, `#A8CF45`) from a prior design.
 - Insight 3: "AI" is an external Google NotebookLM deep-link, not an in-app RAG/agent stack. Hosting-platform SDKs (`/_sdk/*.js`) 404 locally; page falls back to `defaultConfig`.
-- Insight 4: Tailwind CDN is loaded but zero Tailwind utility classes are used; custom CSS owns all styling.
+- Insight 4: Tailwind CDN is loaded with zero utility classes in markup; its Preflight reset still affects global rendering while custom CSS owns the bespoke styling.
 - Insight 5: GitHub Pages Jekyll workflows exist, but root lacks `index.html` / `_config.yml`; report is named `indec.html` (typo vs `index.html`), so default site URL does not serve the report.
 - Insight 6: Modal `openImageModal()` works but has scroll-lock leak (`body.overflow` stays `hidden`) and double-close `removeChild` error due to click bubbling.
 
@@ -31,7 +31,7 @@ Phase Complete: Full top-to-bottom repository analysis & super-app elevation roa
 
 ## Next Immediate Steps
 1. Stakeholder choose vision: stabilize report vs build Intern US platform.
-2. Quick wins: rename/copy to `index.html`, remove Cloudflare leftover + unused Tailwind, fix modal close/scroll lock, dedupe workflow HTML.
+2. Quick wins: rename/copy to `index.html`, remove the Cloudflare leftover, audit and preserve required Tailwind Preflight styles before removing the CDN, fix modal close/scroll lock, and dedupe workflow HTML.
 3. Add README, `.gitignore`, basic Playwright smoke test, and Pages config.
 
 ## Patterns & Recurring Issues Noticed
@@ -41,4 +41,4 @@ Phase Complete: Full top-to-bottom repository analysis & super-app elevation roa
 
 ## Session Log
 - [2026-07-24] Protocol initialized. Full tree mapped (5 tracked content files). Served via `python3 -m http.server 8000`. Validated page load, mind-map modal, NotebookLM link, root directory listing, SDK 404s via Puppeteer + computer-use browser. Wrote `COMPREHENSIVE_REPO_ANALYSIS.md` and `.index/*`.
-- [2026-08-01] Addressed PR review feedback: corrected paths and branch metadata, made the health score reproducible, clarified dependency/build terminology and fallback coverage, documented that transient browser artifacts were not committed, and fixed markdownlint table/fence findings.
+- [2026-08-01] Addressed PR review feedback: corrected paths and branch metadata, made the health score reproducible, clarified dependency/build terminology and fallback coverage, documented transient artifacts, fixed markdownlint findings, and corrected the Tailwind removal recommendation to preserve required Preflight behavior.

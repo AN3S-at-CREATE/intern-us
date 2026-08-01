@@ -31,7 +31,7 @@
 - **Not an application platform** — no auth, data model, matching engine, APIs, or tests.
 - Entry file named `indec.html` (not `index.html`) → GitHub Pages / directory root do not serve the report by default.
 - Modal bugs: body scroll remains `overflow: hidden` after close; × click can throw `removeChild` NotFoundError.
-- Dead/leftover integrations: unused Tailwind CDN, Cloudflare challenge script, duplicate HTML under `.github/workflows/`.
+- Dead/leftover integrations: unused Tailwind utility layer (with active Preflight reset), Cloudflare challenge script, duplicate HTML under `.github/workflows/`.
 - “AI-Enhanced Analysis” is marketing framing for an **external** NotebookLM link (login-gated).
 
 ### Top 5 recommendations
@@ -53,7 +53,7 @@ A **static HTML business/investment report** titled *Intern US Dual‑Perspectiv
 | Layer | Technology | Evidence |
 |-------|------------|----------|
 | Language | HTML5 + CSS3 + vanilla JS | `indec.html` |
-| CSS approach | Custom CSS (~750-line `<style>`) + unused Tailwind CDN | Zero Tailwind utility tokens in markup |
+| CSS approach | Custom CSS (~750-line `<style>`) + Tailwind CDN | Zero utility tokens in markup; Tailwind Preflight still supplies global normalization |
 | Fonts | System stack (`Segoe UI`, Tahoma, Geneva, Verdana) | `body` CSS / `defaultConfig.font_family` |
 | Hosting integration | Element-style SDKs (`element_sdk.js`, `data_sdk.js`) | Script tags; local 404; guarded `elementSdk.init` |
 | AI | Google NotebookLM (external) | CTA `a.ai-chat-button` |
@@ -308,7 +308,7 @@ python3 -m http.server 8000
 | B2 | **High** | Modal leaves `body { overflow: hidden }` | Open modal → close → `document.body.style.overflow === 'hidden'` | Set overflow restore inside `closeModal`; remove bogus `modal.onremove` |
 | B3 | **High** | Double-close throws `removeChild` | Click × (bubbles to modal) | `closeButton.onclick = (e) => { e.stopPropagation(); closeModal(); }`; guard if already removed |
 | B4 | **High** | Duplicate page HTML in workflows | `.github/workflows/index.html` == `indec.html` | Single source; optional build copy step |
-| B5 | **Medium** | Unused Tailwind CDN | 0 utility classes | Remove script |
+| B5 | **Medium** | Tailwind utilities unused, but CDN Preflight remains active | 0 utility classes; custom CSS sets `box-sizing` only on `body` | Identify required reset styles, migrate them locally, visually verify parity, then remove the CDN |
 | B6 | **Medium** | Cloudflare challenge leftover | 404 `/cdn-cgi/...` | Delete trailing IIFE |
 | B7 | **Medium** | Dual color systems | 24× `#455C08` vs neon CSS | Migrate content to CSS variables |
 | B8 | **Medium** | Mind-map hosted externally (~6MB) | iili.io dependency | Optimize + self-host in `assets/` |

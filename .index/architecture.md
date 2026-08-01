@@ -6,7 +6,7 @@ Single-page **static document** with light client-side interactivity. Not a mult
 ```text
 Browser
   ├─ indec.html (content + ~750 lines custom CSS + inline JS)
-  ├─ External: cdn.tailwindcss.com (loaded, unused by classes)
+  ├─ External: cdn.tailwindcss.com (no utility classes; Preflight reset active)
   ├─ External: iili.io mind-map PNG
   ├─ External: notebooklm.google.com (AI chat deep-link)
   ├─ Optional host: /_sdk/element_sdk.js + data_sdk.js (404 locally)
