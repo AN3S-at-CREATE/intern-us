@@ -2,7 +2,7 @@
 
 ## ADR-001 — Static HTML as delivery vehicle
 - **Decision:** Ship the Intern US strategic analysis as a self-contained HTML page.
-- **Rationale:** Zero deps, easy embed in Element/SDK hosts and static hosting.
+- **Rationale:** No package or application-build dependencies; easy to embed in Element/SDK hosts and static hosting, while deployment can still use Jekyll.
 - **Consequence:** No server logic, limited interactivity, content edits require HTML surgery.
 
 ## ADR-002 — External NotebookLM for “AI”

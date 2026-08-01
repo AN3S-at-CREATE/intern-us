@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary
 
-**Overall health score: 58/100** — strong as a **content-complete static strategic report**; weak as an **engineered product** or path to a production Intern US platform.
+**Overall health score: 54.1/100** — the equal-weight mean of the seven dimension scores below (379 ÷ 7); strong as a **content-complete static strategic report**, but weak as an **engineered product** or path to a production Intern US platform.
 
 | Dimension | Score | Notes |
 |-----------|------:|-------|
@@ -22,7 +22,7 @@
 | Security / POPIA posture | 55 | No PII collection in-repo; external Google redirect needs disclosure |
 
 ### Key strengths
-- Self-contained, zero-dependency static page that **loads and delivers investor-facing narrative value today**.
+- Self-contained static page with no package or application-build dependencies that **loads and delivers investor-facing narrative value today**; external runtime integrations remain optional or content-specific.
 - Substantial domain content (SA youth unemployment, WIL, monetisation, competitors, growth).
 - Working interactive mind-map lightbox and graceful SDK fallback via `defaultConfig`.
 - Documented Cloud agent runbook in `AGENTS.md`.

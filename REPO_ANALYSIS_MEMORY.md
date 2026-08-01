@@ -4,7 +4,7 @@
 Phase Complete: Full top-to-bottom repository analysis & super-app elevation roadmap delivered (2026-07-24). Report artifact: `COMPREHENSIVE_REPO_ANALYSIS.md`.
 
 ## Key Architectural Insights Discovered
-- Insight 1: Repo is a single static HTML strategic report (`indec.html`, ~81 KB / 1841 lines), not a multi-tier application. No backend, DB, package manager, or build step.
+- Insight 1: Repo is a single static HTML strategic report (`indec.html`, ~81 KB / 1841 lines), not a multi-tier application. It has no backend, DB, package manager, or application build step; deployment uses Jekyll.
 - Insight 2: Dual visual systems conflict — neon cyan/magenta CSS theme vs residual olive/green inline styles (`#455C08`, `#A8CF45`) from a prior design.
 - Insight 3: "AI" is an external Google NotebookLM deep-link, not an in-app RAG/agent stack. Hosting-platform SDKs (`/_sdk/*.js`) 404 locally; page falls back to `defaultConfig`.
 - Insight 4: Tailwind CDN is loaded but zero Tailwind utility classes are used; custom CSS owns all styling.
@@ -26,7 +26,7 @@ Phase Complete: Full top-to-bottom repository analysis & super-app elevation roa
 ## Decisions Made & Rationale
 - Decision: Produce analysis as committed markdown + `.index/` knowledge base rather than code changes to the report.
   Rationale: User requested exhaustive analysis/roadmap output, not feature implementation in this turn.
-- Decision: Score overall health ~58/100 as a static report product with weak engineering foundations.
+- Decision: Score overall health 54.1/100 as the equal-weight mean of seven documented dimensions.
   Rationale: Content/presentation strong; packaging, a11y, tests, deploy defaults, and modal bugs drag score down.
 
 ## Next Immediate Steps
@@ -36,9 +36,9 @@ Phase Complete: Full top-to-bottom repository analysis & super-app elevation roa
 
 ## Patterns & Recurring Issues Noticed
 - Pattern: Content completeness far ahead of engineering hygiene (no README/tests/a11y).
-- Recurring Issue: External/third-party coupling (iili.io image, NotebookLM, Tailwind CDN, Cloudflare challenge iframe, Element SDKs) without local fallbacks beyond image placeholder.
+- Recurring Issue: Remote assets and services (iili.io image, NotebookLM, Tailwind CDN, Cloudflare challenge iframe) have limited local fallback coverage; the optional Element SDK integration does fall back to `defaultConfig`.
 - Recurring Issue: Design-system inconsistency (neon CSS vs green inline content styles).
 
 ## Session Log
 - [2026-07-24] Protocol initialized. Full tree mapped (5 tracked content files). Served via `python3 -m http.server 8000`. Validated page load, mind-map modal, NotebookLM link, root directory listing, SDK 404s via Puppeteer + computer-use browser. Wrote `COMPREHENSIVE_REPO_ANALYSIS.md` and `.index/*`.
-- [2026-08-01] Addressed PR review feedback: corrected the analysis branch name and server root, removed environment-specific absolute paths, and documented that transient browser artifacts were not committed.
+- [2026-08-01] Addressed PR review feedback: corrected paths and branch metadata, made the health score reproducible, clarified dependency/build terminology and fallback coverage, and documented that transient browser artifacts were not committed.

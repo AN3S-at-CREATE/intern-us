@@ -9,7 +9,7 @@
 | `.github/workflows/index.html` | Byte-identical copy of `indec.html` (misplaced) | Deprecated / misplaced |
 | `COMPREHENSIVE_REPO_ANALYSIS.md` | Full repository analysis & super-app roadmap; uses checkout-relative commands and reproducible evidence descriptions | Active (analysis artifact) |
 | `REPO_ANALYSIS_MEMORY.md` | Persistent analysis state for agents | Active |
-| `.index/*` | Agent/human project context index | Active |
+| `.index/*` | Agent/human project context index, including review-corrected architecture and decision terminology | Active |
 | `.agent/` | Reserved agent state directory | Active |
 
 ## Explicitly absent (expected for this repo type, but gaps for maturity)
