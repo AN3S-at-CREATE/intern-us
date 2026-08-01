@@ -1,8 +1,8 @@
 # Intern US Business Investment Report — Comprehensive Repository Analysis & Super-App Elevation Roadmap
 
 **Analysis date:** 2026-07-24  
-**Repository root:** `/workspace`  
-**Branch of analysis artifacts:** `main/repo-analysis-super-roadmap-40bc`  
+**Repository root:** repository checkout root (`.`)
+**Branch of analysis artifacts:** `main-repo-analysis-super-roadmap-40bc`
 **Analyst posture:** Evidence-based static review + live execution (HTTP serve, Puppeteer, interactive browser)
 
 ---
@@ -72,7 +72,7 @@ No React/Next, no Python/Node app server, no Docker Compose app, no vector DB, n
 ### Complete tree (tracked / meaningful paths)
 
 ```
-/workspace
+.
 ├── AGENTS.md                          # Cloud agent runbook
 ├── indec.html                         # PRIMARY APP (report page)
 ├── COMPREHENSIVE_REPO_ANALYSIS.md     # This analysis (added)
@@ -224,7 +224,7 @@ flowchart LR
 
 ### Setup executed
 ```bash
-python3 -m http.server 8000 --directory /workspace
+python3 -m http.server 8000
 # Open http://127.0.0.1:8000/indec.html
 ```
 
@@ -237,12 +237,12 @@ python3 -m http.server 8000 --directory /workspace
 | GET `/_sdk/element_sdk.js` | curl / Puppeteer | **404 / failed** (expected locally) | failed request log |
 | GET `/_sdk/data_sdk.js` | Puppeteer | **Failed** | failed request log |
 | Tailwind CDN reachability | curl HEAD | **Reachable** (302 → versioned) | network |
-| Mind-map image `iili.io` | curl HEAD + browser | **Pass** image/png ~6.1 MB | network + screenshots |
+| Mind-map image `iili.io` | curl HEAD + browser | **Pass** image/png ~6.1 MB | network response + browser observation |
 | NotebookLM CTA href | DOM | **Present** → notebook UUID URL | Puppeteer `aiHref` |
 | NotebookLM access | curl HEAD | **302 to Google login** | Not anonymously public |
-| Page render / neon theme | Browser | **Pass** | `/opt/cursor/artifacts/61299.webp` |
-| Sections visible | Browser | **Pass** | screenshots |
-| Mind-map click → modal | Browser + Puppeteer | **Pass** overlay + × visible | `d84ce.webp`, puppeteer `modalOpen` |
+| Page render / neon theme | Browser | **Pass** | interactive browser observation |
+| Sections visible | Browser | **Pass** | interactive browser observation |
+| Mind-map click → modal | Browser + Puppeteer | **Pass** overlay + × visible | browser observation + Puppeteer `modalOpen` result |
 | Close via backdrop | Both | **Pass** modal removed | `afterClose.modalGone: true` |
 | Close via × | Puppeteer | **Partial** — closes but throws `removeChild` NotFoundError | `pageErrors` |
 | Body scroll after close | Puppeteer | **Fail** `bodyOverflow` remains `"hidden"` | `afterClose` / `afterX` |
@@ -448,22 +448,21 @@ Memory file updated with phase completion + insights + open questions. Index ini
 
 ### B. Analysis commands used
 ```bash
-find /workspace -type f ...
+find . -type f ...
 python3 -m http.server 8000
 curl -I http://127.0.0.1:8000/indec.html
 curl -I https://iili.io/Ksoxuf9.png
 curl -I https://notebooklm.google.com/notebook/...
 google-chrome --headless=new --screenshot=...
-node /tmp/chrome-test/modal-test.mjs   # puppeteer-core
+node <temporary-test-script>   # puppeteer-core validation script
 # Interactive browser validation (computer-use agent)
 ```
 
 ### C. Artifacts
-- `/opt/cursor/artifacts/61299.webp` — hero / AI CTA  
-- `/opt/cursor/artifacts/0b228.webp` — mind-map section  
-- `/opt/cursor/artifacts/d84ce.webp` — modal open  
-- `/opt/cursor/artifacts/puppeteer-results.json` — automation evidence  
-- `/tmp/analysis-artifacts/*` — local test outputs  
+- No binary runtime artifacts were committed. Screenshots and Puppeteer output were
+  temporary analysis-session files and are not cited as durable evidence.
+- The reproducible commands above and the results matrix preserve the tested behavior;
+  future validation should retain any required artifacts under a tracked project path.
 
 ### D. Limitations
 - Browser MCP server unavailable; used Puppeteer + computer-use instead.  

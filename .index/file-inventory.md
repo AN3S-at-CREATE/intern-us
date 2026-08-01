@@ -7,7 +7,7 @@
 | `.github/workflows/jekyll-gh-pages.yml` | Deploy to GitHub Pages via Jekyll | Active |
 | `.github/workflows/jekyll-docker.yml` | CI Jekyll build in Docker on push/PR | Active |
 | `.github/workflows/index.html` | Byte-identical copy of `indec.html` (misplaced) | Deprecated / misplaced |
-| `COMPREHENSIVE_REPO_ANALYSIS.md` | Full repository analysis & super-app roadmap | Active (analysis artifact) |
+| `COMPREHENSIVE_REPO_ANALYSIS.md` | Full repository analysis & super-app roadmap; uses checkout-relative commands and reproducible evidence descriptions | Active (analysis artifact) |
 | `REPO_ANALYSIS_MEMORY.md` | Persistent analysis state for agents | Active |
 | `.index/*` | Agent/human project context index | Active |
 | `.agent/` | Reserved agent state directory | Active |
